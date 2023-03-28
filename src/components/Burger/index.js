@@ -12,7 +12,7 @@ const Burger = (props) => {
     }
   });
 
-  if(content.length === 0  )
+  if(content.length === 0)
   {
    content =  <p> Орцоо сонгоно уу ???? </p>
   } 
