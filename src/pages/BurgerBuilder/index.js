@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Burger from "../../components/Burger";
+import BuildControls from "../../components/BuildControls";
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
@@ -9,6 +10,17 @@ class BurgerBuilder extends Component {
       meat: 0,
     },
   };
+
+  ortsNemeh = type => {
+    const  newIngredients = {...this.state.ingredients};
+    
+    newIngredients[type]++; 
+
+    console.log(newIngredients)
+    this.setState({ingredients : newIngredients})
+
+
+  };
   render() {
     return (
       <div>
@@ -16,7 +28,9 @@ class BurgerBuilder extends Component {
           {" "}
           <Burger orts={this.state.ingredients} />
         </div>
-        <div>Орцны удирдлага</div>
+        <div>
+          <BuildControls ortsNemeh={this.ortsNemeh} />
+        </div>
       </div>
     );
   }
