@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import Burger from "../../components/Burger";
 import BuildControls from "../../components/BuildControls";
+import Modal from "../../components/General/Modal";
+import OrderSummary from "../../components/OrderSummary";
+import { findAllByDisplayValue } from "@testing-library/react";
 
 const INGREDIENT_PRICE = { salad: 150, cheese: 250, bacon: 800, meat: 1500 };
+const INGREDIENT_NAMES = {
+  salad: "Салат",
+  cheese: "Бяслаг",
+  bacon: "Гахайн мах",
+  meat: "Үхрийн мах",
+};
 
 class BurgerBuilder extends Component {
   state = {
@@ -14,6 +23,15 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 1000,
     purchasing: false,
+    confirmOrder: false,
+  };
+
+  showConfirmModal = () => {
+    this.setState({ confirmOrder: true });
+  };
+
+  closeConfirmModal = () => {
+    this.setState({ confirmOrder: false });
   };
 
   ortsNemeh = (type) => {
@@ -56,11 +74,18 @@ class BurgerBuilder extends Component {
     return (
       <div>
         <div>
-          {" "}
+          <Modal show = {this.state.confirmOrder} close= {this.closeConfirmModal}>
+            <OrderSummary
+              ingredients={this.state.ingredients}
+              ingredientsNames={INGREDIENT_NAMES}
+            />
+          </Modal>
           <Burger orts={this.state.ingredients} />
         </div>
         <div>
           <BuildControls
+            showConfirmModal = {this.showConfirmModal}
+            ingredientsNames={INGREDIENT_NAMES}
             disabled={!this.state.purchasing}
             price={this.state.totalPrice}
             ortsNemeh={this.ortsNemeh}
