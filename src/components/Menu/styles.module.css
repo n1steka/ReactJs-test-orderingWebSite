@@ -7,3 +7,10 @@
     height: 100%;
     align-items: center;
 }
+
+
+@media(max-width:500px) { 
+    .Menu  { 
+        display: block;
+    }
+}

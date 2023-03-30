@@ -1,16 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import css from "./style.module.css";
 import Toolbar from "../../components/Toolbar";
 import BurgerPage from "../BurgerPage";
-function App() {
-  return (
-    <div>
-      <Toolbar />
-      <main className={css.Content}>
-        <BurgerPage />
-      </main>
-    </div>
-  );
+import SideBar from "../../components/SideBar";
+class App extends Component {
+  state = {
+    showSideBar: false,
+  };
+
+  toggleSideBar = () => {
+    this.setState((prevState) => {
+      return { showSideBar: !prevState.showSideBar };
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <Toolbar toggleSideBar={this.toggleSideBar} />
+        <SideBar
+          showSideBar={this.state.showSideBar}
+          toggleSideBar={this.toggleSideBar}
+        />
+        <main className={css.Content}>
+          <BurgerPage />
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;

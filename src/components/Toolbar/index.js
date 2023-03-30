@@ -6,12 +6,10 @@ const Toolbar = () => {
   return (
     <header className={css.Toolbar}>
       <div>...</div>
-      <div>
-        <Logo />
-      </div>
-      <div>
+      <Logo />
+      <nav className={css.HideOnMobile} >
         <Menu />
-      </div>
+      </nav>
     </header>
   );
 };
